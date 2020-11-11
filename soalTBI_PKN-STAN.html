@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Science Society</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="./assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+<link href="./assets/css/font-awesome.css" rel="stylesheet">
+<link href="./assets/css/style.css" rel="stylesheet">
+<link href="./assets/css/pages/dashboard.css" rel="stylesheet">
+
+<!-- jqmath -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia">
+<link href="./assets/css/jqmath-0.4.3.css" rel="stylesheet">
+<link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
+
+<style type="text/css" id="style">
+    th {
+      text-align: center;
+    }
+
+    .fontAwesome{
+      font-family: 'Helvetica', FontAwesome, sans-serif;
+
+    }
+    p {
+      font-family: 'Helvetica', FontAwesome, sans-serif;
+      font-size: 11pt;
+      margin-bottom: 0;
+      margin-left: 1%;
+      margin-right: 1%;
+
+    }
+    ol{
+        margin-bottom: 0;
+    }
+    h2{margin-left:1%;
+      margin-right: 1%;
+    }
+    #tombolsoal{
+      text-align: "justify";
+      padding: 1.5%;
+    }
+    .btn-soal{
+      display: "inline-block";
+      width: 15%;
+    }
+   .marked{
+      color : red;
+   }
+</style>
+
+</head>
+<body>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="./index.html">Science Society Jember </a>
+
+        <span class="pull-right" style="color: #FFFFFF"><h1 id="timer"></h1></span>
+      </div>
+        <!--/container -->
+    </div>
+      <!-- /navbar-inner -->
+  </div>
+    <!-- /navbar -->
+
+
+<div class="main" style="margin-top:20px;">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span8" >
+          <!-- /widget -->
+          <div class="widget widget-nopad">
+            <div class="widget-header" style="text-align: center;"> <i class="icon-book"></i>
+             <button class="btn-navigasi btn-navigasi_prev" id="prev" onclick="prev()" style="left: 1%;">Prev</button>
+             <button class="btn-navigasi btn-navigasi_next" id="next" onclick="next()" style="right: 1%;">Next</button>
+             <h3 id="headersoal"> Soal TBI</h3>
+           </div>
+      <!--   <div class="widget-header"> <i class="icon-list-alt"></i>
+              <h3> TPA  </h3>
+            </div> -->
+            <!-- /widget-header -->
+            <div class="widget-content" style="padding-top:3.5%; ">
+              <!-- <form> -->
+
+                    <div class="control-group" style="padding: 0 5%; text-align: justify;" id="divsoal">
+                    <div class="controls" id="tempatpilihan" style="margin-left: 2%; padding: 1%;">
+
+                    </div>
+                                          </div>  <!-- /controls -->
+
+              <!-- </form> -->
+               </div>
+            <!-- /widget-content -->
+          </div>
+          <!-- /widget -->
+        </div>
+
+        <div class="span4  nomorsoal-box" style="max-height: 350px; overflow: auto;">
+
+              <!-- /widget -->
+              <div class="widget widget-nopad">
+                <div class="widget-header"> <i class="icon-search"></i>
+                  <h3> Nomor Soal TBI</h3>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content" id="tombolsoalTBI"></div>
+                <!-- /widget-content -->
+              </div>
+              <!-- /widget -->
+
+        </div>
+        <div class="span4 pull-right" style="margin-top: .5rem">
+
+          <!-- /widget -->
+          <div class="widget widget-nopad">
+            <!-- /widget-header -->
+            <div class="widget-content time-box" style="text-align: center; vertical-align: middle; padding: 1%; height: 150px; position: relative;">
+              <button class="btn-selesai" style="left:50%; transform: translateX(-50%);bottom: 2%; position: absolute; width: 40%; height: 40%;" onclick="done()"><b>Selesai</b></button>
+            </div>
+            <!-- /widget-content -->
+          </div>
+          <!-- /widget -->
+
+
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="span4"></div>
+        <div class="span4"></div>
+
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /container -->
+  </div>
+  <!-- /main-inner -->
+</div>
+<!-- /main -->
+
+<div class="footer">
+  <div class="footer-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12" > &copy; 2020 <a href="#"><b>Science Society<b></a>. </div>
+        <!-- /span12 -->
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /container -->
+  </div>
+  <!-- /footer-inner -->
+</div>
+<!-- /footer -->
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./assets/js/jquery-1.7.2.min.js"></script>
+<script src="./assets/js/excanvas.min.js"></script>
+<script src="./assets/js/chart.min.js" type="text/javascript"></script>
+<script src="./assets/js/bootstrap.js"></script>
+<script src="./assets/js/base.js"></script>
+<script type="text/javascript" src="./assets/js/jqmath-etc-0.4.3.min.js"></script>
+<script type="text/javascript" src="./assets/js/soalTBI1.js"></script>
+
+<script>
+
+  var tanda = function(){
+  var nomor = $(".active").val();
+  $("#nosoal"+nomor).toggleClass("active");
+  $("#nosoal"+nomor).toggleClass("btn-danger");
+  $("#nosoal"+nomor).toggleClass("active");
+
+}
+
+//NAVIGASI SOAL
+function pindahsoal(clicked){
+  //hide soal sebelumnya
+  var soalaktif = $(".active").val();
+  $("#nosoal"+soalaktif).toggleClass("active");
+  $("#soal"+soalaktif).toggle();
+  $("#pilihansoal"+soalaktif).toggle();
+  //show soal yg dipilih
+   $(clicked).toggleClass("active");
+   $("#soal"+$(clicked).val()).toggle();
+   $("#pilihansoal"+$(clicked).val()).toggle();
+
+   $("#prev").show();
+   $("#next").show();
+
+   if($(clicked).val() == 1) {
+    $("#prev").hide();
+   }
+
+   if($(clicked).val() == 20) {
+    $("#next").hide();
+   }
+
+}
+
+function prev() {
+  //hide soal sebelumnya
+  var soalaktif = parseInt($(".active").val());
+  $("#nosoal"+soalaktif).toggleClass("active");
+  $("#soal"+soalaktif).toggle();
+  $("#pilihansoal"+soalaktif).toggle();
+  //show soal yg dipilih
+   $("#nosoal"+(soalaktif-1)).toggleClass("active");
+   $("#soal"+$("#nosoal"+(soalaktif-1)).val()).toggle();
+   $("#pilihansoal"+$("#nosoal"+(soalaktif-1)).val()).toggle();
+
+   $("#prev").show();
+   $("#next").show();
+
+   if(soalaktif == 1){
+    $("#prev").hide();
+   }
+  }
+
+
+function next() {
+  //hide soal sebelumnya
+  var soalaktif = parseInt($(".active").val());
+  $("#nosoal"+soalaktif).toggleClass("active");
+  $("#soal"+soalaktif).toggle();
+  $("#pilihansoal"+soalaktif).toggle();
+  //show soal yg dipilih
+   $("#nosoal"+(soalaktif+1)).toggleClass("active");
+   $("#soal"+$("#nosoal"+(soalaktif+1)).val()).toggle();
+   $("#pilihansoal"+$("#nosoal"+(soalaktif+1)).val()).toggle();
+
+   $("#prev").show();
+   $("#next").show();
+
+  //  if(soalaktif == 1) {
+  //   $("#prev").hide();
+  //  }
+
+   if(soalaktif == ($('.soal').length) - 1){
+    $("#next").hide();
+   }
+}
+
+//=======================================
+  function listsoal (){
+  var data = soal();
+
+        var btnTBI ="";
+
+        for (var x = 1; x<=data.soal.length; x++) {
+            btnTBI += "<button class='btn-soal btn-soalTBI' id='nosoal"+x+"' value="+x+" onClick='pindahsoal(this)'><b>"+x+"</b></button>";
+      }
+      $("#tombolsoalTBI").html(btnTBI);
+      $("#tombolsoalTBI").css({"padding": "1rem", "display" : "flex","flex-wrap": "wrap", "justify-content" : "center", "align-items" : "center"});
+      $(".btn-soal").css({"margin": ".25rem", "margin-bottom": ".125rem", "padding":".5rem 1rem","display" : "flex","justify-content": "center" ,"align-items" : "center"});
+
+  }
+
+//append btn tanda
+function btntanda(){
+  var x = '<button id="tanda" class="btn-tandai" onClick="tanda()" style="position:absolute; width:90%; height: 40%; left:50%; transform: translateX(-50%); top: 10%;"><i class="icon-flag" style="margin-right: 10px"></i> tandai soal</button>';
+  $(".time-box").append(x);
+}
+
+
+
+$(document).ready(function() {
+    $("#prev").hide();
+    listsoal();
+    showsoal();
+    btntanda();
+    checkboxfunc();
+    setJawabanUser();
+    var forceleft = " fmath.ma-block{text-align:left;}";
+    $("#style").append(forceleft);
+
+    $("#nosoal1").toggleClass("active");
+    $("#soal1").toggle();
+    $("#pilihansoal1").toggle();
+
+    var timer;
+    var end;
+    var sisa;
+    var waktu = new Date().getTime() + ( 20 * 60 * 1000) + 1000;
+
+    function setTimer() {
+        localStorage.waktu = waktu;
+        end = new Date().getTime();
+        sisa = waktu - end;
+        var jam = Math.floor((sisa % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var menit = Math.floor((sisa % (1000 * 60 * 60)) / (1000 * 60));
+        var detik = Math.floor((sisa % (1000 * 60)) / 1000);
+        if (sisa<0) {
+            clearInterval(timer);
+            localStorage.removeItem("waktu");
+            done();
+        }else{
+            var disjam = ("00"+jam).substr(-2);
+            var dismen = ("00"+menit).substr(-2);
+            var disdet = ("00"+detik).substr(-2);
+            $("#timer").html(disjam+" : "+dismen+" : "+disdet);
+        }
+    }
+
+    function conTimer(){
+        end = new Date().getTime();
+
+        sisa = localStorage.waktu - end;
+        var jam = Math.floor((sisa % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        var menit = Math.floor((sisa % (1000 * 60 * 60)) / (1000 * 60));
+        var detik = Math.floor((sisa % (1000 * 60)) / 1000);
+        if (sisa<0) {
+            clearInterval(timer);
+            localStorage.removeItem("waktu")
+            done();
+         }else{
+            var disjam = ("00"+jam).substr(-2);
+            var dismen = ("00"+menit).substr(-2);
+            var disdet = ("00"+detik).substr(-2);
+            $("#timer").html(disjam+" : "+dismen+" : "+disdet);
+          }
+    }
+
+    timer = (localStorage.waktu) ? setInterval(conTimer, 1000) : setInterval(setTimer, 1000)
+});
+
+
+//Cek jawaban
+var done = () => {
+    var data = soal();
+    var benarTBI = 0;
+    var salahTBI = 0;
+    var kosongTBI = 0;
+
+    for(var x = 0 ; x < data.soal.length ; x++){
+
+        if (jawabanUser[x] != null) {
+          if (jawabanUser[x] == data.opsi[x][5]) {
+            benarTBI++;
+          }else {
+            salahTBI++;
+          }
+        }else {
+          kosongTBI++;
+        }
+
+    }
+
+    var totalskorTBI = (benarTBI * 5);
+    localStorage.nilaiTBI = totalskorTBI;
+    localStorage.benarTBI = benarTBI;
+    localStorage.salahTBI = salahTBI;
+    localStorage.kosongTBI = kosongTBI;
+
+    localStorage.removeItem('waktu');
+
+    setTimeout(() => {
+      window.location.replace("nilai_PKN-STAN.html");
+    },500)
+
+}
+
+var checkboxfunc = () => {
+    var data = soal();
+    var jawabanUser = ''
+    $("input:checkbox").on('change',function() {
+
+    var group = "input:checkbox[name="+$(this).prop('name')+"]";
+
+    if(this.checked) {
+      jawabanUser = $(this).val()
+      $("input:checkbox[name='" + $(this).prop('name') + "']").not(this).removeAttr("checked");
+      var nomor = $(".active").val();
+      $("#nosoal"+ nomor).toggleClass("active");
+      $("#nosoal"+ nomor).addClass("btn-success");
+      $("#nosoal"+ nomor).toggleClass("active");
+    }else {
+      jawabanUser = null
+      var nomor = $(".active").val();
+      $("#nosoal"+nomor).removeClass("btn-success");
+    }
+
+    var indexOpsi = parseInt($(this).attr('name').slice(11)) - 1
+    getJawabanUser(indexOpsi, jawabanUser)
+  });
+}
+
+
+    const initJawabanUser = () => {
+      var data = soal()
+      var tempJawabanUser = []
+      for(var i = 0; i < data.soal.length; i++) {
+        tempJawabanUser[i] = null
+      }
+      return tempJawabanUser
+    }
+
+    const getJawabanUser = (index, jawaban) => {
+      jawabanUser[index] = (jawaban) ? jawaban : null
+      saveJawaban(jawabanUser)
+    }
+
+    var jawabanUser = (localStorage.jawabanUser) ? JSON.parse(localStorage.jawabanUser) : initJawabanUser()
+
+
+    const saveJawaban = (jawaban) => {
+      localStorage.jawabanUser = JSON.stringify(jawaban)
+      console.log(JSON.parse(localStorage.jawabanUser))
+    }
+
+    const setJawabanUser = () => {
+      for(var i = 0; i < jawabanUser.length; i++) {
+
+        if(jawabanUser[i] != null) {
+          $(`input[name=checkboxbtn${i + 1}][value=${jawabanUser[i]}]`).attr('checked', 'checked')
+          $(`#nosoal${i + 1}`).addClass('btn-success')
+        }
+
+      }
+    }
+
+    </script>
+
+
+  <script>
+    $('body').on('keyup', function(e) {
+      if(e.which == 68) {
+        // console.log(e.which)
+        if($("#next").is(':hidden')) {
+          return false
+        }
+        next()
+      } else if(e.which == 65) {
+
+        // console.log(e.which)
+        if($("#prev").is(':hidden')) {
+          return false
+        }
+
+        prev()
+      } else if(e.which == 84) {
+        tanda()
+        // console.log(e.which)
+      }
+      // console.log(e.which)
+
+     })
+  </script>
+</body>
+</html>

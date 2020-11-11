@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Science Society</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
+    
+    <style>
+        * { 
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* --color1 : rgb(255, 98, 35); */
+            --color2 : rgb(219, 0, 219);
+            
+            --color1 : rgb(2, 182, 182);
+            /* --color2 : darkblue; */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* background: linear-gradient(to right, rgb(255, 102, 0), rgb(243, 137, 66)); */
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: whitesmoke;
+            flex-wrap: wrap;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h3 {
+            position: absolute;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            top: 2rem;
+            left: 0;
+            color: white;
+            font-size: xx-large;
+            font-family: cursive;
+            text-shadow: 0 -.25rem .25rem var(--color1), 
+                        0 .25rem .25rem var(--color2) ,
+                        .25rem 0 .25rem var(--color2) ,
+                        -.25rem 0 .25rem var(--color1),
+                        .25rem .25rem .25rem var(--color2) ,
+                        -.25rem .25rem .25rem var(--color1),
+                        .25rem -.25rem .25rem var(--color1),
+                        .25rem .25rem .25rem var(--color2) ;
+        }
+
+        .box { 
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 40%;
+            /* background: rgb(24, 21, 21); */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        a {
+            position: relative;
+            text-decoration: none;
+            /* padding: 2rem; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background: whitesmoke; */
+            height: 20rem;
+            width: 15rem;
+            /* margin: 0 .5rem; */
+            color: rgb(24, 21, 21);
+            z-index: 0;
+            font-family: cursive;
+            font-size: xx-large;
+            transition: .3s;
+            transform-origin: center;
+            /* -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #f5f5f5d7); */
+        }
+
+        a div {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /* background: linear-gradient(to left, lightsalmon, white, lightsalmon); */
+            background: linear-gradient(to bottom, whitesmoke, lightgrey);
+            border-radius: 1rem;
+        }
+
+        a img {
+            width: 100%;
+            /* height: auto; */
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+        }
+
+        a.left {
+            transform: perspective(30rem) rotateY(20deg);
+        }
+
+        a.right {
+            transform: perspective(30rem) rotateY(-20deg);
+
+        }
+
+        .box:hover a { 
+            opacity: 0.2;
+        }
+        
+        .box a:hover {
+            /* background: lightgrey; */
+            transform: perspective(30rem) rotateY(0deg);
+            opacity: 1;
+        }
+
+        a.right:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            right: -1px;
+            left: -1px;
+            filter: blur(3px);
+            background: linear-gradient(to right, var(--color1), var(--color2) );
+            z-index: -10;
+            border-radius: 1rem;
+            /* -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0004); */
+
+            /* transform-origin: center;
+            transform: perspective(30rem) rotateY(-20deg); */
+        }
+        
+        a.left:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            right: -1px;
+            left: -1px;
+            filter: blur(3px);
+            background: linear-gradient(to right, var(--color1), var(--color2) );
+            z-index: -10;
+            border-radius: 1rem;
+            /* -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0004); */
+
+            /* transform-origin: center;
+            transform: perspective(30rem) rotateY(-20deg); */
+        }
+
+        .overlay {
+            display: none;
+            /* opacity: 0; */
+            transition: .3s;
+            position: absolute;
+            background: rgba(0,0,0,.6);
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirmation-form {
+            width: 350px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 2rem;
+            background: whitesmoke;
+            /* padding: 1rem; */
+            position: relative;
+        }
+
+        .confirmation-form:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            left: -1px;
+            right: -1px;
+            background: linear-gradient(to right, var(--color1), var(--color2) );
+            filter: blur(3px);
+            border-radius: 1rem;
+        }
+
+        .input-group {
+            width: 100%;
+            height: 100%;
+            padding: .5rem;
+            margin: 0;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background: linear-gradient(to bottom, whitesmoke, lightgrey);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .input-group label {
+            display: inline-block;
+            width: 100%;
+            font-family: cursive;
+            font-size: large;
+        }
+
+        .input-group input {
+            display: block;
+            line-height: 2rem;
+            text-align: center;
+            font-size: medium;
+            font-family: cursive;
+            outline: 0;
+            background: transparent;
+            border: 0;
+            transition: .3s;
+            border-bottom: solid 1px rgba(0,0,0,.3);
+            width: 100%;
+        }
+
+
+        .input-group button {
+            background: linear-gradient(to right, var(--color1), var(--color2) );
+            padding: .5rem;
+            float: right;
+            display: block;
+            border: 0;
+            outline: 0;
+            font-size: medium;
+            font-family: cursive;
+            color: whitesmoke;
+            width: 100%;
+            margin: 1rem 0;
+            border-radius: 1rem;
+            margin-bottom: 0;
+        }
+
+        .input-group button:after {
+            content: '⇨';
+            margin-left: 1rem;
+        }
+
+        .input-group input:focus {
+             /* background: rgba(0,0,0,.3); */
+             /* border: 0; */
+        }
+
+        .input-group input:focus + .line {
+            width: 100%;
+        }
+
+
+
+        .line {
+            /* position: absolute; */
+            /* bottom: 49%; */
+            /* left: 1.5rem; */
+            display: inline-block;
+            margin-top: -1.2rem;
+            position: relative;
+            bottom: 0px;
+            height: 2px;
+            width: 0;
+            text-align: center;
+            transition: all .3s ease-in-out;
+            background: linear-gradient(to right, var(--color1), var(--color2) );
+        }
+
+        .alert-box {
+            opacity: 1;
+            z-index: 3;
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translate(-50%);
+            min-width: 300px;
+            min-height: 150px;
+            background: whitesmoke;
+            padding: 1rem;
+            border-radius: .5rem;
+            border: solid 1px rgba(0,0,0,.3);
+            /* text-transform: capitalize; */
+            box-shadow: 0 .25rem .5rem rgba(0,0,0,.6);
+        }
+
+        .alert-box span {
+            display: block;
+            padding: 1.25rem;
+            /* border: solid 1px rgba(0,0,0,.6); */
+            border-radius: .5rem;
+            color: black;
+            background-color: #fafafa;
+        }
+
+        .alert-box button {
+            display: block;
+            float: right;
+            width: 30%;
+            height: auto;
+            padding: .75rem;
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            outline: 0;
+            border: 0;
+            border-radius: .5rem;
+            background: #fafafa;
+            color: black;
+            font-weight: bold;
+            box-shadow: -2px -2px 8px rgba(255,255,255,1),
+                        -2px -2px 12px rgba(255,255,255,.5),
+                        inset 2px 2px 4px rgba(255,255,255,.1),
+                        2px 2px 8px rgba(0,0,0,.15);
+        }
+        @media only screen and (max-width: 600px) {
+            .box {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="alert-box" style="display: none;">
+        <span>Oops! Wrong Password!</span>
+        <button onclick="alertHide()">OK</button>
+    </div>
+
+
+    <h3>Pilih Tryout</h3>
+    <div class="box">
+
+        <a class="left" onclick="passwordConfimation(this)" data-u="./introCPNS.html" data-p="LolosCPNSAmin"><div><img src="./assets/img/CATCPNS.png" alt=""></div></a class="left">
+        <a class="right"onclick="passwordConfimation(this)" data-u="./introPKN-STAN.html" data-p="LolosPKNSTANAmin"><div><img src="./assets/img/logoStan.png" alt=""></div></a>
+
+    </div>
+
+    
+    <div class="overlay" onclick="hideConfirmationform()">
+        <form class="confirmation-form" onclick="event.stopPropagation()">
+            <input type="hidden" id="checker" value="">
+            <div class="input-group">
+                <label for="pass">Password</label>
+                <input type="password" id="pass" class="input-control" name="pass" onfocus="this.select()">
+                <span class="line"></span>
+                <button type="button" id="checkPassword" onclick=" check(this)">Check Password</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="./assets/js/jquery-1.7.2.min.js"></script>
+    <script>
+        localStorage.removeItem('login-status')
+        $('.overlay').hide()
+        $('.alert-box').hide()
+      
+        $('input#pass').on('keyup keydown', function(e) { 
+            e.stopImmediatePropagation()
+            if(e.which == 13) {
+                check($('#checkPassword'))
+            }
+            console.log(e.which)
+            // console.log($(this).val())
+        })
+
+        $('form').on('submit', function(e) { 
+            e.preventDefault()
+            check($('#checkPassword'))
+        })
+        var passwordConfimation = t => showConfirmationform($(t).data('p'), $(t).data('u'))
+        var hideConfirmationform = () => $('.overlay').fadeOut('fast')
+
+        var showConfirmationform = (checker, url) => {
+            $('.overlay').css('display','flex').hide().fadeIn('fast')
+            $("#checker").val(checker)
+            $('#checkPassword').attr('data-u', url)
+            $('#pass').focus()
+        }
+
+        var check = t => {
+            if($('#pass').val() == $('#checker').val()){
+                console.log('it\'s a match!')
+                localStorage.setItem('login-status','1')
+                window.location.href =  $(t).data('u') 
+            } else {
+                alertShow()
+            }
+            hideConfirmationform()
+        }
+
+        var alertShow = () => {
+            $('.box').fadeOut('slow')
+            $('.alert-box').fadeIn('fast')
+        }
+
+        var alertHide = () => {
+            $('.box').fadeIn('slow')
+            $('.alert-box').fadeOut('fast')
+        }
+        
+        $('body').on('keyup', function(e) {
+            if(e.which == 13) {
+                e.stopPropagation()
+                alertHide()
+            }
+        })
+    </script>
+</body>
+</html>

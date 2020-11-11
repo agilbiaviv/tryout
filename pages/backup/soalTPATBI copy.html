@@ -1,0 +1,452 @@
+
+
+<div class="main" style="margin-top:20px;">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+   
+
+        <div class="span9" >
+             <div class="widget-header" style="text-align: center;"> <i class="icon-book"></i>
+              <button class="btn btn-warning" id="prev" onclick="prev()" style="position: absolute; left: 1%; top:15%; width: auto;">Prev</button>
+              <button class="btn btn-warning" id="next" onclick="next()" style="position: absolute; right: 1%; top:15%; width: auto">Next</button>
+              <h3 id="headersoal"> Soal TPA</h3>
+            </div>
+          <!-- /widget -->
+        <div class="widget widget-nopad">
+      <!--   <div class="widget-header"> <i class="icon-list-alt"></i>
+              <h3> TPA  </h3>
+            </div> -->
+            <!-- /widget-header -->
+            <div class="widget-content" style="padding-top:3.5%; ">
+              <!-- <form> -->
+                
+                    <div class="control-group" style="padding-left: 5%; " id="divsoal">                     
+                    <div class="controls" id="tempatpilihan" style="margin-left: 2%; padding: 1%;">
+
+                    </div>
+                    </div>  <!-- /controls -->      
+                   
+              <!-- </form> -->
+               </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget --> 
+        </div>
+        
+         <div class="span3">
+          
+          <!-- /widget -->
+        <div class="widget widget-nopad">
+        <div class="widget-header"> <i class="icon-time"></i>
+              <h3> TIMER </h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content time-box" style="text-align: center; vertical-align: middle; padding: 1%; height: 200px; position: relative;">
+                    <h1 id="timer"></h1>
+                    <button class="btn btn-success" style="left:5%; bottom: 5%; position: absolute; width: 90%;" onclick="done()"><b>Selesai</b></button>
+               </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget --> 
+        </div>
+
+      </div>
+
+      <div class="row">
+           <div class="span6">
+          
+          <!-- /widget -->
+        <div class="widget widget-nopad">
+        <div class="widget-header"> <i class="icon-search"></i>
+              <h3> Nomor Soal TPA</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content" id="tombolsoalTPA">
+
+               </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget --> 
+        </div>
+         <div class="span6">
+          
+          <!-- /widget -->
+        <div class="widget widget-nopad">
+        <div class="widget-header"> <i class="icon-search"></i>
+              <h3> Nomor Soal TBI</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content" id="tombolsoalTBI">
+
+               </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget --> 
+        </div>
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /main-inner --> 
+</div>
+<!-- /main -->
+
+<form method="post" action="<?=base_url();?>index.php/TPA/nilai">
+  <input type="hidden" name="nama">
+  <input type="hidden" name="benar">
+  <input type="hidden" name="salah">
+
+</form>
+
+<div class="footer">
+  <div class="footer-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12" > &copy; <?= date("Y") ?> <a href="#"><b>Science Society<b></a>. </div>
+        <!-- /span12 --> 
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /footer-inner --> 
+</div>
+<!-- /footer --> 
+<!-- Le javascript
+================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script src="<?= base_url();?>assets/js/jquery-1.7.2.min.js"></script> 
+<script src="<?= base_url();?>assets/js/excanvas.min.js"></script> 
+<script src="<?= base_url();?>assets/js/chart.min.js" type="text/javascript"></script> 
+<script src="<?= base_url();?>assets/js/bootstrap.js"></script>
+<script src="<?= base_url();?>assets/js/base.js"></script> 
+<script type="text/javascript" src="<?=base_url()?>assets/js/jqmath-etc-0.4.3.min.js"></script>
+<script type="text/javascript" src="<?= base_url();?>assets/js/soalTOAN4.js"></script>
+
+<script>      
+
+  var tanda = function(){
+  var nomor = $(".active").val();
+  $("#nosoal"+nomor).toggleClass("active");
+  $("#nosoal"+nomor).toggleClass("btn-danger");
+  $("#nosoal"+nomor).toggleClass("active");
+
+}
+
+//NAVIGASI SOAL
+function pindahsoal(clicked){
+  //hide soal sebelumnya
+  var soalaktif = $(".active").val();
+  $("#nosoal"+soalaktif).toggleClass("active");
+  $("#soal"+soalaktif).toggle();
+  $("#pilihansoal"+soalaktif).toggle();
+  //show soal yg dipilih
+   $(clicked).toggleClass("active");
+   $("#soal"+$(clicked).val()).toggle();
+   $("#pilihansoal"+$(clicked).val()).toggle();
+
+   if($(clicked).val()<=50){
+    $("#headersoal").html("Soal TPA");
+   }else{
+    $("#headersoal").html("Soal TBI");
+   }
+   $("#prev").show();
+   $("#next").show();
+   if($(clicked).val()==1){
+    $("#prev").hide();
+   }
+   if($(clicked).val()==75){
+    $("#next").hide();
+   }
+
+}
+
+function prev(){
+  //hide soal sebelumnya
+  var soalaktif = parseInt($(".active").val());
+  $("#nosoal"+soalaktif).toggleClass("active");
+  $("#soal"+soalaktif).toggle();
+  $("#pilihansoal"+soalaktif).toggle();
+  //show soal yg dipilih
+   $("#nosoal"+(soalaktif-1)).toggleClass("active");
+   $("#soal"+$("#nosoal"+(soalaktif-1)).val()).toggle();
+   $("#pilihansoal"+$("#nosoal"+(soalaktif-1)).val()).toggle();
+
+   if($("#nosoal"+(soalaktif-1)).val()<=50){
+    $("#headersoal").html("Soal TPA");
+   }else{
+    $("#headersoal").html("Soal TBI");
+   }
+
+   $("#prev").show();
+   $("#next").show();
+
+   if($("#nosoal"+(soalaktif-1)).val()==1){
+    $("#prev").hide();
+   }
+   if($("#nosoal"+(soalaktif-1)).val()==75){
+    $("#next").hide();
+   }
+}
+
+function next(){
+  //hide soal sebelumnya
+  var soalaktif = parseInt($(".active").val());
+  $("#nosoal"+soalaktif).toggleClass("active");
+  $("#soal"+soalaktif).toggle();
+  $("#pilihansoal"+soalaktif).toggle();
+  //show soal yg dipilih
+   $("#nosoal"+(soalaktif+1)).toggleClass("active");
+   $("#soal"+$("#nosoal"+(soalaktif+1)).val()).toggle();
+   $("#pilihansoal"+$("#nosoal"+(soalaktif+1)).val()).toggle();
+
+   if($("#nosoal"+(soalaktif+1)).val()<=50){
+    $("#headersoal").html("Soal TPA");
+   }else{
+    $("#headersoal").html("Soal TBI");
+   }
+
+   $("#prev").show();
+   $("#next").show();
+   
+   if($("#nosoal"+(soalaktif+1)).val()==1){
+    $("#prev").hide();
+   }
+   if($("#nosoal"+(soalaktif+1)).val()==75){
+    $("#next").hide();
+   }
+}
+
+//=======================================
+  function listsoal (){
+  var data = soal();
+
+        var btnTPA ="";
+        var btnTBI ="";
+
+        for (var x = 1; x<=data.soal.length; x++) {
+          if(x<=50){ 
+            var angka = ("00"+x).substr(-2);
+
+          btnTPA += "<button class='btn btn-soalTPA' id='nosoal"+x+"' value="+x+" onClick='pindahsoal(this)'><b>"+angka+"</b></button>";
+          }else{
+            var angka = ("00"+x).substr(-2);
+
+          btnTBI += "<button class='btn btn-soalTBI' id='nosoal"+x+"' value="+x+" onClick='pindahsoal(this)'><b>"+angka+"</b></button>";
+          }
+        }
+          $("#tombolsoalTPA").html(btnTPA);
+          $("#tombolsoalTBI").html(btnTBI);
+          $("#tombolsoalTPA").css({"padding": "1rem", "display" : "flex","flex-wrap": "wrap", "justify-content" : "center", "align-items" : "center"});
+          $("#tombolsoalTBI").css({"padding": "1rem", "display" : "flex","flex-wrap": "wrap", "justify-content" : "center", "align-items" : "center"});
+          $(".btn-soalTPA").css({"margin": ".25rem", "margin-bottom": ".125rem", "padding":".5rem 1rem","display" : "flex","justify-content": "center" ,"align-items" : "center"});
+          $(".btn-soalTBI").css({"margin": ".25rem", "margin-bottom": ".125rem", "padding":".5rem 1rem","display" : "flex","justify-content": "center" ,"align-items" : "center"});
+
+       
+  }
+
+  $(".btn-soalTPA").click(function(){
+    $("#headersoal").html("Soal TPA");
+  });
+   $(".btn-soalTBI").click(function(){
+    $("#headersoal").html("Soal TBI");
+  });
+
+ //append btn tanda
+ function btntanda(){
+  var x = '<button id="tanda" class="btn btn-warning pull-right" onClick="tanda()" style="position:absolute; width:90%; padding: 1rem 0; left:5%; bottom: 40%;"><i class="icon-flag"></i> tandai soal</button>';
+  $(".time-box").append(x);
+ }
+
+
+
+      $(document).ready(function(){
+        $("#prev").hide();
+       listsoal();
+       showsoal();
+       btntanda();
+       checkboxfunc();
+       var forceleft = " fmath.ma-block{text-align:left;}";
+       $("#style").append(forceleft);
+
+       $("#nosoal1").toggleClass("active");
+       $("#soal1").toggle();
+       $("#pilihansoal1").toggle();
+        var timer;
+        var end;
+        var sisa;
+        var waktu = new Date().getTime() + (60*60*1000) + 1000;
+
+        function setTimer(){
+        localStorage.waktu = waktu;
+        end = new Date().getTime();
+
+        sisa = waktu - end;
+
+        var jam = Math.floor((sisa % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var menit = Math.floor((sisa % (1000 * 60 * 60)) / (1000 * 60));
+        var detik = Math.floor((sisa % (1000 * 60)) / 1000);
+          if (sisa<0) {
+
+            clearInterval(timer);
+            localStorage.removeItem("waktu");
+            done();
+
+          }else{
+            var disjam = ("00"+jam).substr(-2);
+            var dismen = ("00"+menit).substr(-2);
+            var disdet = ("00"+detik).substr(-2);
+           $("#timer").html(disjam+" : "+dismen+" : "+disdet);
+          } 
+        }
+
+        function conTimer(){
+        end = new Date().getTime();
+
+        sisa = localStorage.waktu - end;
+        var jam = Math.floor((sisa % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        var menit = Math.floor((sisa % (1000 * 60 * 60)) / (1000 * 60));
+        var detik = Math.floor((sisa % (1000 * 60)) / 1000);
+          if (sisa<0) {
+
+            clearInterval(timer);
+            localStorage.removeItem("waktu")
+            done();
+         }else{
+                     var disjam = ("00"+jam).substr(-2);
+            var dismen = ("00"+menit).substr(-2);
+            var disdet = ("00"+detik).substr(-2);
+           $("#timer").html(disjam+" : "+dismen+" : "+disdet);
+          } 
+        }
+if (localStorage.waktu) {
+
+  timer = setInterval(conTimer,1000);
+
+}else{
+  timer = setInterval(setTimer,1000);
+}
+
+
+});
+
+
+//Cek jawaban
+var done = function(){
+  var data = soal();
+  var benarTPA = 0;
+  var salahTPA = 0;
+  var benarTBI = 0;
+  var salahTBI = 0;
+  var kosongTPA = 0;
+  var kosongTBI = 0;
+
+  for(var x = 0 ; x < data.soal.length ; x++){
+    var jawaban = $("input[name=checkboxbtn"+(x+1)+"]:checked").val();
+
+    if(x<50){
+
+    if (jawaban) {
+      if (jawaban == data.opsi[x][5]) {
+        benarTPA++;
+      }else{
+        salahTPA++;
+      }
+    }
+    else{
+      kosongTPA++;
+    }
+
+
+    }// if TPA 
+    else{
+      if (jawaban) {
+      if (jawaban == data.opsi[x][5]) {
+        benarTBI++;
+      }else{
+        salahTBI++;
+
+      }
+    }else{
+      kosongTBI++;
+    }
+
+    }
+
+    
+    
+  }
+    var totalskorTPA = (benarTPA*4) - salahTPA;
+    localStorage.nilaiTPA = totalskorTPA;
+    localStorage.benarTPA = benarTPA;
+    localStorage.salahTPA = salahTPA;
+    localStorage.kosongTPA = kosongTPA;
+    
+    var totalskorTBI = (benarTBI*4) - salahTBI;
+    localStorage.nilaiTBI = totalskorTBI;
+    localStorage.benarTBI = benarTBI;
+    localStorage.salahTBI = salahTBI;
+    localStorage.kosongTBI = kosongTBI;
+
+          window.location.replace("<?=base_url();?>index.php/Soal/nilai");
+    
+
+
+}
+
+var checkboxfunc = function(){
+  var data = soal();
+$("input:checkbox").click(function(){
+
+var group = "input:checkbox[name="+$(this).prop('name')+"]";
+if(this.checked){
+
+  $("input:checkbox[name='" + $(this).prop('name') + "']").not(this).removeAttr("checked");
+
+    var nomor = $(".active").val();
+  $("#nosoal"+nomor).toggleClass("active");
+  $("#nosoal"+nomor).toggleClass("btn-outline-warning");
+  $("#nosoal"+nomor).addClass("btn-outline-success");
+  $("#nosoal"+nomor).toggleClass("active");
+}else{
+     var nomor = $(".active").val();
+  $("#nosoal"+nomor).toggleClass("btn-outline-warning");
+  $("#nosoal"+nomor).removeClass("btn-outline-success");
+}
+
+
+});  
+}
+       
+
+    </script>
+
+<script> 
+    $('body').on('keyup', function(e) {
+      if(e.which == 68) {
+        console.log(e.which)
+        if($("#next").is(':hidden')) {
+          return false
+        }
+        next()
+      } else if(e.which == 65) {
+        
+        console.log(e.which)
+        if($("#prev").is(':hidden')) {
+          return false
+        }
+
+        prev()
+      } else if(e.which == 84) {
+        tanda()
+        console.log(e.which)
+      }
+      console.log(e.which)
+
+     })
+  </script>
+</body>
+</html>

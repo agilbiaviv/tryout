@@ -1,0 +1,193 @@
+
+<div class="main" style="margin-top:20px;">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+     
+        <div class="span12">
+          
+          <!-- /widget -->
+        <div class="widget widget-nopad">
+        <div class="widget-header"> <i class="icon-list-alt"></i>
+              <h3> NILAI </h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <table class="table table-stripped table-bordered">
+                <thead >
+                  <tr>
+                    <th style="text-align: center;"><strong>Jenis Soal</strong></th>
+                    <th style="text-align: center;"><strong>Jawaban Benar</strong></th>
+                    <th style="text-align: center;"><strong>Jawaban Salah</strong></th>
+                    <th style="text-align: center;"><strong>Jawaban Kosong</strong></th>
+                    <th style="text-align: center;"><strong>Nilai</strong></th>
+                    <th style="text-align: center;"><strong>Keterangan</strong></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr id="TWK">
+                  <td>Soal TWK</td>
+                </tr>
+                <tr id="TIU">
+                  <td>Soal TIU</td>
+                </tr>
+                <tr id="TKP">
+                  <td>Soal TKP</td>
+                </tr>
+                <!-- <tr id="TPA">
+                  <td>Soal TPA</td>
+                </tr>
+                <tr id="TBI">
+                  <td>Soal TBI</td>
+                </tr> -->
+                </tbody>
+
+              </table>
+
+               </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget --> 
+          
+        </div>
+        
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /main-inner --> 
+</div>
+<!-- /main -->
+
+<div class="footer">
+  <div class="footer-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12" > &copy; 2020 <a href="#">Science Society</a>. </div>
+        <!-- /span12 --> 
+      </div>
+      <!-- /row --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /footer-inner --> 
+</div>
+<!-- /footer --> 
+<!-- Le javascript
+================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script src="<?= base_url();?>assets/js/jquery-1.7.2.min.js"></script> 
+<script src="<?= base_url();?>assets/js/excanvas.min.js"></script> 
+<script src="<?= base_url();?>assets/js/chart.min.js" type="text/javascript"></script> 
+<script src="<?= base_url();?>assets/js/bootstrap.js"></script>
+<!-- <script language="javascript" type="text/javascript" src="assets/js/full-calendar/fullcalendar.min.js"></script> -->
+<script src="<?= base_url();?>assets/js/base.js"></script> 
+<!-- <script src="assets/js/jquery-ui.js"></script> -->
+
+<script>      
+      $(document).ready(function(){
+        //==================== TIU ===================
+        var benarTIU = "<td>"+localStorage.benarTIU+"</td>";
+        var salahTIU = "<td>"+localStorage.salahTIU+"</td>";
+        var kosongTIU = "<td>"+localStorage.kosongTIU+"</td>";
+        var nilaiTIU = "<td>"+localStorage.nilaiTIU+"</td>";
+        var ketTIU = "";
+        if(parseInt(localStorage.nilaiTIU) >= 80){
+          ketTIU = "<td>Selamat, <strong><u>anda lolos</u></strong> nilai ambang batas! </td>";
+        }else{
+          ketTIU = "<td>Maaf, <strong><u>anda tidak lolos</u></strong> nilai ambang batas! :(</td>";
+        }
+
+        var dataTIU = benarTIU + salahTIU + kosongTIU + nilaiTIU + ketTIU;
+        $("#TIU").append(dataTIU);
+
+        //==================== TWK ===================
+        var benarTWK = "<td>"+localStorage.benarTWK+"</td>";
+        var salahTWK = "<td>"+localStorage.salahTWK+"</td>";
+        var kosongTWK = "<td>"+localStorage.kosongTWK+"</td>";
+        var nilaiTWK = "<td>"+localStorage.nilaiTWK+"</td>";
+        var ketTWK = "";
+        if(parseInt(localStorage.nilaiTWK) >= 65) {
+          ketTWK = "<td>Selamat, <strong><u>anda lolos</u></strong> nilai ambang batas! </td>";
+        } else {
+          ketTWK = "<td>Maaf, <strong><u>anda tidak lolos</u></strong> nilai ambang batas! :(</td>";
+        }
+
+        var dataTWK = benarTWK + salahTWK + kosongTWK + nilaiTWK + ketTWK;
+        $("#TWK").append(dataTWK);
+
+        //==================== TKP ===================
+        var benarTKP = "<td>-</td>";
+        var salahTKP = "<td>-</td>";
+        var kosongTKP = "<td>-</td>";
+        var nilaiTKP = "<td>"+localStorage.nilaiTKP+"</td>";
+        var ketTKP = "";
+        if(parseInt(localStorage.nilaiTKP) >= 126){
+          ketTKP = "<td>Selamat, <strong><u>anda lolos</u></strong> nilai ambang batas! </td>";
+        }else{
+          ketTKP = "<td>Maaf, <strong><u>anda tidak lolos</u></strong> nilai ambang batas! :(</td>";
+        }
+
+        var dataTKP = benarTKP + salahTKP + kosongTKP + nilaiTKP + ketTKP;
+        $("#TKP").append(dataTKP);
+
+        // //===================== TPA =================
+        // var benarTPA = "<td>"+localStorage.benarTPA+"</td>";
+        // var salahTPA = "<td>"+localStorage.salahTPA+"</td>";
+        // var kosongTPA = "<td>"+localStorage.kosongTPA+"</td>";
+        // var nilaiTPA = "<td>"+localStorage.nilaiTPA+"</td>";
+        // var ketTPA = "";
+        // if(parseInt(localStorage.nilaiTPA)>66){
+        //   ketTPA = "<td>Selamat, <strong>anda lolos</strong> nilai ambang batas! </td>";
+        // }else{
+        //   ketTPA = "<td>Maaf, <strong>anda tidak lolos</strong> nilai ambang batas! :(</td>";
+        // }
+
+        // var dataTPA = benarTPA + salahTPA + kosongTPA + nilaiTPA + ketTPA;
+        // $("#TPA").append(dataTPA);
+
+        // //================== TBI ==================
+        // var benarTBI = "<td>"+localStorage.benarTBI+"</td>";
+        // var salahTBI = "<td>"+localStorage.salahTBI+"</td>";
+        // var kosongTBI = "<td>"+localStorage.kosongTBI+"</td>";
+        // var nilaiTBI = "<td>"+localStorage.nilaiTBI+"</td>";
+        // var ketTBI = "";
+        // if(parseInt(localStorage.nilaiTBI)>16){
+        //   ketTBI = "<td>Selamat, <strong>anda lolos</strong> ambang batas! </td>";
+        // }else{
+        //   ketTBI = "<td>Maaf, <strong>anda tidak lolos</strong> ambang batas! :(</td>";
+        // }
+
+        // var dataTBI = benarTBI + salahTBI + kosongTBI + nilaiTBI + ketTBI;
+        // $("#TBI").append(dataTBI);
+
+        // localStorage.removeItem('benarTPA');
+        // localStorage.removeItem('salahTPA');
+        // localStorage.removeItem('kosongTPA');
+        // localStorage.removeItem('nilaiTPA');
+
+        // localStorage.removeItem('benarTBI');
+        // localStorage.removeItem('salahTBI');
+        // localStorage.removeItem('kosongTBI');
+        // localStorage.removeItem('nilaiTBI');
+
+        // localStorage.removeItem('benarTIU');
+        // localStorage.removeItem('salahTIU');
+        // localStorage.removeItem('kosongTIU');
+        // localStorage.removeItem('nilaiTIU');
+
+        // localStorage.removeItem('benarTWK');
+        // localStorage.removeItem('salahTWK');
+        // localStorage.removeItem('kosongTWK');
+        // localStorage.removeItem('nilaiTWK');
+
+        // localStorage.removeItem('nilaiTKP');
+
+        localStorage.removeItem('waktu');
+        localStorage.removeItem('jawabanUser')
+      });
+
+    </script><!-- /Calendar -->
+</body>
+</html>
